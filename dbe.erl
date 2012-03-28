@@ -22,9 +22,10 @@ match(Element, DbRef) ->
     ets:select(DbRef, ets:fun2ms(fun({K, V}) when V == Element -> K end)).
 
 read(Key, DbRef) ->
-    case ets:select(DbRef, ets:fun2ms(fun({K, V}) when K == Key -> V end)) of
-	[] ->
-	    {error, instance};
-	[F] ->
-	    {ok, F}
-    end.
+%    case ets:select(DbRef, ets:fun2ms(fun({K, V}) when K == Key -> V end)) of
+%	[] ->
+%	    {error, instance};
+%	[F] ->
+%	    {ok, F}
+%    end.
+    ets:lookup(DbRef, Key).
